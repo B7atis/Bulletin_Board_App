@@ -1,4 +1,32 @@
-@import '../../../styles/settings.scss';
+@import "../../../styles/settings.scss";
 
-// .root {
-// }
+.root {
+  text-transform: uppercase;
+
+  .toolbar {
+    justify-content: space-between;
+    background-color: rgb(165, 47, 47);
+
+    .logo:hover {
+      background: inherit;
+    }
+
+    .userType {
+      position: absolute;
+      right: 20%;
+      min-width: 100px;
+    }
+
+    .postsButton {
+      min-width: 100px;
+    }
+
+    .button:hover {
+      text-decoration: none;
+      background: $white;
+      color: $main;
+      transition: $transition;
+      border: 1px solid $white;
+    }
+  }
+}
