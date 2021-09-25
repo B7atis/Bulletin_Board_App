@@ -2,7 +2,7 @@ export const initialState = {
   posts: {
     data: [
       {
-        id: 1,
+        id: '1',
         title: 'Test1',
         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
         date: '22.09.2021 10:54',
@@ -15,7 +15,7 @@ export const initialState = {
         city: 'Bangkok',
       },
       {
-        id: 2,
+        id: '2',
         title: 'Test2',
         content: 'Nulla mattis leo quis est luctus, posuere tempor velit imperdiet.',
         date: '15.01.2021 09:54',
@@ -28,7 +28,7 @@ export const initialState = {
         city: 'Austria',
       },
       {
-        id: 3,
+        id: '3',
         title: 'Test3',
         content: 'Donec pretium rhoncus leo vel faucibus.',
         date: '24.08.2021 20:42',

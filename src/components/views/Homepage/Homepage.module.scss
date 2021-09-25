@@ -1,4 +1,13 @@
-@import '../../../styles/settings.scss';
+@import "../../../styles/settings.scss";
 
-// .root {
-// }
+.root {
+  padding: $base-size ($base-size * 3);
+
+  .header {
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: $main;
+    margin: 0 335px 0 335px;
+    padding: 30px 0;
+  }
+}
