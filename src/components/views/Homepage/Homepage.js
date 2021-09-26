@@ -5,26 +5,55 @@ import clsx from 'clsx';
 
 import { connect } from 'react-redux';
 import { getAll } from '../../../redux/postsRedux';
+import { getUserType } from '../../../redux/userRedux';
+
 import { PostSummary } from '../../features/PostSummary/PostSummary';
+import { Button, Link } from '@material-ui/core';
 
 import styles from './Homepage.module.scss';
 
-const Component = ({ className, posts }) => (
+const Component = ({ className, posts, userType }) => (
   <div className={clsx(className, styles.root)}>
-    <h1 className={styles.header}>Announcements</h1>
-    {posts.map(post => (
-      <PostSummary key={post.id} {...post} />
-    ))}
+    <div className={styles.header}>
+      <h1>Announcements</h1>
+      <div>
+        {userType === 'not-logged-in'
+          ? ''
+          : <Button
+            className={styles.button}
+            component={Link}
+            href='/post/add'
+            variant="outlined"
+            color="inherit"
+            size="large"
+          >
+            + Add new post
+          </Button>
+        }
+      </div>
+    </div>
+
+    {posts
+      .sort((a, b) => (
+        new Date(b.lastUpdate) - new Date(a.lastUpdate)
+      ))
+      .map(post => (
+        <PostSummary key={post.id} {...post} />
+      ))
+    }
   </div>
 );
+
 
 Component.propTypes = {
   posts: PropTypes.array,
   className: PropTypes.string,
+  userType: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
   posts: getAll(state),
+  userType: getUserType(state),
 });
 
 // const mapDispatchToProps = dispatch => ({
