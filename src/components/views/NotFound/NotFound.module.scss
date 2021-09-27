@@ -1,4 +1,43 @@
-@import '../../../styles/settings.scss';
+@import "../../../styles/settings.scss";
 
-// .root {
-// }
+.root {
+  padding: $base-size ($base-size * 3);
+  text-align: center;
+  margin: ($base-size * 2) 0;
+  border: 1px solid $grey;
+  border-radius: 20px;
+  box-shadow: 0 0 30px $shadow;
+
+  h1 {
+    font-size: 80px;
+    color: $error;
+    margin: ($base-size * 2) 0;
+  }
+
+  h2 {
+    display: inline-block;
+    margin: ($base-size * 2) 0;
+    padding: $base-size * 2;
+    background: $buttonNo;
+    border-radius: 5px;
+    text-decoration: none;
+    color: $white;
+    transition: $transition;
+
+    &:hover {
+      color: $buttonNo;
+      background: $grey;
+    }
+  }
+
+  h3 {
+    color: $letter2;
+    font-size: 25px;
+    font-weight: lighter;
+  }
+
+  .page {
+    color: $letter;
+    font-size: 35px;
+  }
+}
