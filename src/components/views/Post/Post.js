@@ -3,35 +3,42 @@ import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
+import { connect } from 'react-redux';
+import { getAll } from '../../../redux/postsRedux';
 
 import styles from './Post.module.scss';
 
-const Component = ({className, children}) => (
+import { PostDetails } from '../../features/PostDetails/PostDetails';
+
+const Component = ({ className, posts, ...props }) => (
   <div className={clsx(className, styles.root)}>
-    <h2>Post</h2>
-    {children}
+    {posts.map(post => (
+      post.id !== props.match.params.id
+        ? ''
+        : <PostDetails key={post.id} {...post} />
+    ))}
   </div>
 );
 
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  posts: PropTypes.array,
+  match: PropTypes.object,
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
+const mapStateToProps = state => ({
+  posts: getAll(state),
+});
 
 // const mapDispatchToProps = dispatch => ({
 //   someAction: arg => dispatch(reduxActionCreator(arg)),
 // });
 
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps)(Component);
 
 export {
-  Component as Post,
-  // Container as Post,
+  // Component as Post,
+  Container as Post,
   Component as PostComponent,
 };

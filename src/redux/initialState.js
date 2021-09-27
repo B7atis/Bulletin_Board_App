@@ -10,9 +10,9 @@ export const initialState = {
         email: 'john@doe.com',
         status: 'published',
         image: 'https://cdn.pixabay.com/photo/2015/05/28/23/12/auto-788747_960_720.jpg',
-        price: 1000,
+        price: '',
         phone: '123-456-789',
-        city: 'Bangkok',
+        city: '',
       },
       {
         id: '2',

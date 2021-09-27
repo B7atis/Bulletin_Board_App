@@ -9,8 +9,9 @@
     align-items: center;
     color: $letter;
     text-decoration: none;
-    border: 1px solid $main;
+    border: 1px solid $red;
     border-radius: 5px;
+    box-shadow: 0 0 30px $shadow;
   }
 
   .postImage {

@@ -21,7 +21,7 @@ const Component = ({ id, className, title, image, price, lastUpdate }) => (
       <div className={styles.postInfo}>
         <h2>{title}</h2>
         <p>Last update: {lastUpdate}</p>
-        <h2>{price} $</h2>
+        <h2>{price ? `${price} $` : ''}</h2>
       </div>
     </Link>
   </div>
@@ -32,7 +32,7 @@ Component.propTypes = {
   className: PropTypes.string,
   title: PropTypes.string,
   image: PropTypes.string,
-  price: PropTypes.number,
+  price: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   lastUpdate: PropTypes.string,
 };
 

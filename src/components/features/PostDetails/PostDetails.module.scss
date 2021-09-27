@@ -1,0 +1,113 @@
+@import "../../../styles/settings.scss";
+
+.root {
+  padding: $base-size ($base-size * 3);
+  margin: ($base-size * 2) 0;
+  border: 1px solid $grey;
+  border-radius: 20px;
+  box-shadow: 0 0 30px $shadow;
+
+  .header {
+    margin: ($base-size * 2) 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: $main;
+
+    h1 {
+      margin: 0;
+    }
+
+    .button {
+      color: inherit;
+      text-decoration: none;
+      min-width: 300px;
+
+      &:hover {
+        background: lighten($main, 50%);
+        transition: $transition;
+      }
+    }
+  }
+
+  .post {
+    display: flex;
+    flex-wrap: wrap;
+    padding: ($base-size * 2) 0;
+
+    .postImage {
+      flex: 1;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .postText {
+      flex: 2;
+      text-align: justify;
+      letter-spacing: 1px;
+      line-height: 1.7;
+      margin: 0 ($base-size * 3);
+      color: $letter;
+      font-size: 20px;
+    }
+
+    .postInfo {
+      flex: 1;
+      text-align: right;
+      color: $main;
+
+      .price {
+        margin: 0;
+        padding: ($base-size / 4) ($base-size / 2);
+        text-transform: uppercase;
+        color: $white;
+        background: $main;
+        border-radius: 5px;
+      }
+
+      .contactDetails {
+        margin: ($base-size * 2) 0;
+        padding: ($base-size / 4) ($base-size / 2);
+        background: lighten($main, 50%);
+        border-radius: 5px;
+        line-height: 1.7;
+
+        h2 {
+          margin: 0;
+        }
+
+        h3 {
+          margin: 0;
+
+          a {
+            text-decoration: none;
+            color: $main;
+
+            &:hover {
+              color: $black;
+              transition: $transition;
+            }
+          }
+        }
+      }
+
+      .postData {
+        padding: ($base-size / 4) ($base-size / 2);
+        background: lighten($main, 50%);
+        border-radius: 5px;
+        line-height: 1.7;
+        font-size: $base-size;
+
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
