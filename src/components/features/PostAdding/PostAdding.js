@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
@@ -8,15 +8,144 @@ import clsx from 'clsx';
 
 import styles from './PostAdding.module.scss';
 
-const Component = ({ className, children }) => (
-  <div className={clsx(className, styles.root)}>
-    <h2>Post Adding</h2>
-    {children}
-  </div>
-);
+import { TextField, FormControl, InputLabel, Select, MenuItem, Button, OutlinedInput, InputAdornment } from '@material-ui/core';
+import { ImUpload3 } from 'react-icons/im';
+
+const Component = ({ className }) => {
+
+  const [status, setStatus] = useState('');
+  const handleStatus = event => {
+    setStatus(event.target.value);
+  };
+
+  const [image, setImage] = useState(null);
+  const handleImage = ({ target }) => {
+    setImage(target.files[0]);
+  };
+
+  return (
+    <div className={clsx(className, styles.root)}>
+      <h1>Adding new post</h1>
+
+      <form className={styles.form} action='/' method='POST'>
+        <TextField
+          id='post-title'
+          className={styles.formInput}
+          label='Title'
+          variant='outlined'
+          required
+          inputProps={{
+            minLength: 10,
+            maxLength: 30,
+          }}
+        />
+
+        <TextField
+          id='post-description'
+          className={styles.formInput}
+          label='Description'
+          variant='outlined'
+          multiline
+          required
+          inputProps={{
+            minLength: 20,
+            maxLength: 5000,
+          }}
+        />
+
+        <FormControl className={styles.formInput} variant='outlined'>
+          <InputLabel htmlFor='post-price'>Price</InputLabel>
+          <OutlinedInput
+            id='post-price'
+            type='number'
+            startAdornment={<InputAdornment position='start'>Price $</InputAdornment>}
+            labelWidth={40}
+            inputProps={{
+              min: 1,
+              max: 999999,
+            }}
+          />
+        </FormControl>
+
+        <TextField
+          id='post-email'
+          className={styles.formInput}
+          label='E-mail'
+          variant='outlined'
+          type='email'
+          required
+          inputProps={{
+            minLength: 6,
+            maxLength: 100,
+          }}
+        />
+
+        <TextField
+          id='post-phone'
+          type='tel'
+          className={styles.formInput}
+          label='Phone'
+          variant='outlined'
+          inputProps={{
+            minLength: 9,
+            maxLength: 20,
+          }}
+        />
+
+        <TextField
+          id='post-location'
+          className={styles.formInput}
+          label='Location'
+          variant='outlined'
+          inputProps={{
+            minLength: 3,
+            maxLength: 30,
+          }}
+        />
+
+        <FormControl variant='outlined' className={styles.formInput} required>
+          <InputLabel id='post-status-label'>Status</InputLabel>
+          <Select
+            labelId='post-status-label'
+            id='post-status'
+            value={status}
+            onChange={handleStatus}
+            label='Status'
+          >
+            <MenuItem value={'draft'}>Draft</MenuItem>
+            <MenuItem value={'published'}>Published</MenuItem>
+            <MenuItem value={'closed'}>Closed</MenuItem>
+          </Select>
+        </FormControl>
+
+        <h2><ImUpload3 /></h2>
+        <label htmlFor='post-image'>
+          <Button className={styles.formInput + ' ' + styles.formButton} variant='outlined' component='span'>
+            <input
+              accept='image/*'
+              id='post-image'
+              type='file'
+              onChange={handleImage}
+              hidden
+            />
+            {image ? `Uploaded: ${image.name}` : 'Upload image'}
+          </Button>
+        </label>
+
+        <Button
+          className={styles.formInput + ' ' + styles.formSubmit}
+          type='submit'
+          variant='outlined'
+          size='large'
+        >
+          Publish!
+        </Button>
+      </form>
+    </div>
+  );
+};
 
 Component.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
 };
 

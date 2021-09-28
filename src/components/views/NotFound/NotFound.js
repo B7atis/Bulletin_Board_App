@@ -9,13 +9,14 @@ import clsx from 'clsx';
 import styles from './NotFound.module.scss';
 
 import { Link } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
+import { FaBug } from 'react-icons/fa';
 
 const Component = ({ className }) => (
   <div className={clsx(className, styles.root)}>
     <h1 className={styles.paperCard__textError}>
-      <FontAwesomeIcon icon={faTimesCircle} className={styles.icon} /> 404
+      <FaBug /> 404
     </h1>
     <h1 className={styles.page}>Page not found</h1>
     <h3>We&apos;re sorry, the page you requested could not be found. Please go back to the homepage or contact us.</h3>
