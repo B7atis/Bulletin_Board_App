@@ -9,8 +9,6 @@ import clsx from 'clsx';
 import styles from './NotFound.module.scss';
 
 import { Link } from '@material-ui/core';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
 import { FaBug } from 'react-icons/fa';
 
 const Component = ({ className }) => (
