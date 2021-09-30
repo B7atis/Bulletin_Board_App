@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@b7atis/id_generator.pack@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@b7atis/id_generator.pack/-/id_generator.pack-1.0.1.tgz#440e49a28611ef47e562a655ecc805a97fc8254d"
+  integrity sha512-IFtEy3B5v+/rpMUtPO2447xNxB1cGXqa1W0H5NAEIybtMFP/r8L9cfaFBxN5r6MHJq3aGH2rJiDmRW5BDvSJSQ==
+
 "@babel/code-frame@7.10.4":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.10.4.tgz#168da1a36e90da68ae8d49c0f1b48c7c6249213a"

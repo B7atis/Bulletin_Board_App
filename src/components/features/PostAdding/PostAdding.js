@@ -2,17 +2,28 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
+import randomId from '@b7atis/id_generator.pack';
 
 import { connect } from 'react-redux';
 import { addPost } from '../../../redux/postsRedux';
+import { getUserEmail } from '../../../redux/userRedux';
 import { TextField, FormControl, InputLabel, Select, MenuItem, Button, OutlinedInput, InputAdornment } from '@material-ui/core';
 import { ImUpload3 } from 'react-icons/im';
 
 import styles from './PostAdding.module.scss';
 
-const Component = ({ className, addPost }) => {
+const Component = ({ className, userEmail, addPost }) => {
 
-  const [newPost, setNewPost] = useState({ image: '' });
+  const [newPost, setNewPost] = useState({
+    title: '',
+    content: '',
+    status: 'draft',
+    image: '',
+    price: '',
+    phone: '',
+    city: '',
+    imageName: '',
+  });
 
   const handleNewPost = event => {
     if (event.target.name === 'image') {
@@ -23,16 +34,32 @@ const Component = ({ className, addPost }) => {
     }
   };
 
+  const currentDate = () => {
+    const date = new Date();
+    const day = date.getDate();
+    const month = String(date.getMonth() + 1).padStart(2, 0);
+    const year = date.getFullYear();
+    const hour = String(date.getHours()).padStart(2, 0);
+    const minute = String(date.getMinutes()).padStart(2, 0);
+    return `${day}.${month}.${year} ${hour}:${minute}`;
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
     if (newPost.title && newPost.content && newPost.status) {
       if (newPost.title.length > 10) {
         if (newPost.content.length > 20) {
-          addPost(newPost);
+          addPost({
+            ...newPost,
+            id: randomId(10),
+            email: userEmail,
+            date: currentDate(),
+            lastUpdate: currentDate(),
+          });
           setNewPost({
             title: '',
             content: '',
-            status: '',
+            status: 'draft',
             image: '',
             price: '',
             phone: '',
@@ -194,6 +221,7 @@ const Component = ({ className, addPost }) => {
 
 Component.propTypes = {
   className: PropTypes.string,
+  userEmail: PropTypes.string,
   addPost: PropTypes.func,
 };
 
@@ -201,11 +229,11 @@ const mapDispatchToProps = dispatch => ({
   addPost: newPost => dispatch(addPost(newPost)),
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapStateToProps = state => ({
+  userEmail: getUserEmail(state),
+});
 
-const Container = connect(null, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   // Component as PostAdding,
