@@ -6,12 +6,11 @@ import clsx from 'clsx';
 import { connect } from 'react-redux';
 import { getAll } from '../../../redux/postsRedux';
 import { getUserStatus, getUserEmail } from '../../../redux/userRedux';
-
-import styles from './MyPosts.module.scss';
-
 import { Button, Link } from '@material-ui/core';
 import { NotFound } from '../NotFound/NotFound';
 import { PostSummary } from '../../features/PostSummary/PostSummary';
+
+import styles from './MyPosts.module.scss';
 
 const Component = ({ className, posts, userStatus, userEmail }) => (
   <div className={clsx(className, styles.root)}>

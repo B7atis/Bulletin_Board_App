@@ -9,12 +9,11 @@ import { Button, Link } from '@material-ui/core';
 
 import styles from './PostDetails.module.scss';
 
-
 const Component = ({ className, userStatus, userEmail, id, title, content, date, lastUpdate, email, status, image, price, phone, city }) => (
   <div className={clsx(className, styles.root)}>
+
     <div className={styles.header}>
       <h1>{title}</h1>
-
       {userStatus === 'not-logged-in' || (userStatus === 'logged-in' && userEmail !== email)
         ? ''
         : <Button

@@ -6,11 +6,10 @@ import clsx from 'clsx';
 import { connect } from 'react-redux';
 import { getAll } from '../../../redux/postsRedux';
 import { getUserStatus, getUserEmail } from '../../../redux/userRedux';
-
-import styles from './PostEdit.module.scss';
-
 import { PostEditing } from '../../features/PostEditing/PostEditing';
 import { NotFound } from '../NotFound/NotFound';
+
+import styles from './PostEdit.module.scss';
 
 const Component = ({ className, userStatus, userEmail, posts, ...props }) => (
   <div className={clsx(className, styles.root)}>

@@ -5,11 +5,10 @@ import clsx from 'clsx';
 
 // import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
-
-import styles from './NotFound.module.scss';
-
 import { Link } from '@material-ui/core';
 import { FaBug } from 'react-icons/fa';
+
+import styles from './NotFound.module.scss';
 
 const Component = ({ className }) => (
   <div className={clsx(className, styles.root)}>

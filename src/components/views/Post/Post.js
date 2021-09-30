@@ -5,10 +5,9 @@ import clsx from 'clsx';
 
 import { connect } from 'react-redux';
 import { getAll } from '../../../redux/postsRedux';
+import { PostDetails } from '../../features/PostDetails/PostDetails';
 
 import styles from './Post.module.scss';
-
-import { PostDetails } from '../../features/PostDetails/PostDetails';
 
 const Component = ({ className, posts, ...props }) => (
   <div className={clsx(className, styles.root)}>

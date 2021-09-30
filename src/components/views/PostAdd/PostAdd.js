@@ -5,11 +5,10 @@ import clsx from 'clsx';
 
 import { connect } from 'react-redux';
 import { getUserStatus } from '../../../redux/userRedux';
-
-import styles from './PostAdd.module.scss';
-
 import { PostAdding } from '../../features/PostAdding/PostAdding';
 import { NotFound } from '../NotFound/NotFound';
+
+import styles from './PostAdd.module.scss';
 
 const Component = ({ className, userStatus }) => (
   <div className={clsx(className, styles.root)}>

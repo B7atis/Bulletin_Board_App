@@ -5,11 +5,11 @@ import clsx from 'clsx';
 
 import { connect } from 'react-redux';
 import { getUserStatus, changeUser } from '../../../redux/userRedux';
+import { NavLink } from 'react-router-dom';
+import { AppBar, Toolbar, Typography, Button, Link, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 
 import styles from './Header.module.scss';
 
-import { NavLink } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Button, Link, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 
 const Component = ({ className, userStatus, changeUser }) => {
 

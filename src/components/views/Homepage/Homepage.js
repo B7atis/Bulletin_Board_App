@@ -6,7 +6,6 @@ import clsx from 'clsx';
 import { connect } from 'react-redux';
 import { getAll } from '../../../redux/postsRedux';
 import { getUserStatus } from '../../../redux/userRedux';
-
 import { PostSummary } from '../../features/PostSummary/PostSummary';
 import { Button, Link } from '@material-ui/core';
 
@@ -43,7 +42,6 @@ const Component = ({ className, posts, userStatus }) => (
     }
   </div>
 );
-
 
 Component.propTypes = {
   posts: PropTypes.array,

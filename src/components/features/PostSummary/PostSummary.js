@@ -5,9 +5,9 @@ import clsx from 'clsx';
 
 // import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux';
+import { Link } from '@material-ui/core';
 
 import styles from './PostSummary.module.scss';
-import { Link } from '@material-ui/core';
 
 const Component = ({ id, className, title, image, price, lastUpdate }) => (
   <div className={clsx(className, styles.root)}>

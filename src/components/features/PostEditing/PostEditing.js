@@ -5,11 +5,10 @@ import clsx from 'clsx';
 
 // import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
-
-import styles from './PostEditing.module.scss';
-
 import { TextField, FormControl, InputLabel, Select, MenuItem, Button, OutlinedInput, InputAdornment } from '@material-ui/core';
 import { ImUpload3 } from 'react-icons/im';
+
+import styles from './PostEditing.module.scss';
 
 const Component = ({ className, title, content, email, status, image, price, phone, city }) => {
 
