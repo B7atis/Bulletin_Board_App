@@ -14,7 +14,7 @@ const Component = ({ id, className, title, image, price, lastUpdate }) => (
     <Link className={styles.postLink} href={`/post/${id}`} >
       <div className={styles.postImage}>
         {image === ''
-          ? <img src='https://cdn4.iconfinder.com/data/icons/documents-letters-and-stationery/400/doc-14-512.png' alt='no-pic' />
+          ? <img src='/images/no-pic.png' alt='no-pic' />
           : <img src={image} alt='post-pic' />
         }
       </div>
