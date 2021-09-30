@@ -8,10 +8,10 @@
   box-shadow: 0 0 30px $shadow;
 
   .header {
-    margin: ($base-size * 2) 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
     text-transform: uppercase;
     letter-spacing: 3px;
     color: $main;
@@ -23,7 +23,8 @@
     .button {
       color: inherit;
       text-decoration: none;
-      min-width: 300px;
+      min-width: 250px;
+      margin: $base-size 0;
 
       &:hover {
         background: lighten($main, 50%);
@@ -35,11 +36,10 @@
   .post {
     display: flex;
     flex-wrap: wrap;
-    padding: ($base-size * 2) 0;
 
     .postImage {
       flex: 1 100%;
-      padding-bottom: 10px;
+      margin: ($base-size * 2) 0;
 
       img {
         width: 100%;
@@ -53,13 +53,14 @@
       text-align: justify;
       letter-spacing: 1px;
       line-height: 1.7;
-      margin: 0 ($base-size * 3);
+      margin: ($base-size * 2);
       color: $letter;
       font-size: 20px;
     }
 
     .postInfo {
       flex: 1;
+      margin: ($base-size * 2) 0;
       text-align: right;
       color: $main;
 
@@ -109,6 +110,22 @@
           margin: 0;
         }
       }
+    }
+  }
+
+  @media (max-width: 767px) {
+    .post {
+      flex-direction: column;
+
+      .postText {
+        margin: ($base-size * 2) 0;
+      }
+    }
+  }
+
+  @media (max-width: 991px) {
+    .header {
+      flex-direction: column-reverse;
     }
   }
 }

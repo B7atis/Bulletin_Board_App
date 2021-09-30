@@ -48,4 +48,10 @@
     background: lighten($main, 50%);
     transition: $transition;
   }
+
+  @media (max-width: 767px) {
+    .postLink .postInfo p {
+      display: none;
+    }
+  }
 }
