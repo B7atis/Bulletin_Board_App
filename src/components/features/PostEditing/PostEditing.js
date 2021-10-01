@@ -3,67 +3,77 @@ import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 
-// import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
+import { connect } from 'react-redux';
+import { editPost } from '../../../redux/postsRedux';
+import { getUserEmail } from '../../../redux/userRedux';
 import { TextField, FormControl, InputLabel, Select, MenuItem, Button, OutlinedInput, InputAdornment } from '@material-ui/core';
 import { ImUpload3 } from 'react-icons/im';
 
 import styles from './PostEditing.module.scss';
 
-const Component = ({ className, title, content, email, status, image, price, phone, city }) => {
+const Component = ({ className, userEmail, editPost, title, content, status, image, price, phone, city, imageName }) => {
 
-  const [newTitle, setNewTitle] = useState(title);
-  const handleNewTitle = event => {
-    setNewTitle(event.target.value);
+  const [updatedPost, setUpdatedPost] = useState({
+    title: title,
+    content: content,
+    status: status,
+    image: '',
+    price: price,
+    phone: phone,
+    city: city,
+    imageName: imageName,
+  });
+
+  const handleUpdatedPost = event => {
+    if (event.target.name === 'image') {
+      const image = event.target.files[0];
+      setUpdatedPost({
+        ...updatedPost,
+        image: event.target.value,
+        imageName: image.name,
+      });
+    } else {
+      setUpdatedPost({
+        ...updatedPost,
+        [event.target.name]: event.target.value,
+      });
+    }
   };
 
-  const [newContent, setNewContent] = useState(content);
-  const handleNewContent = event => {
-    setNewContent(event.target.value);
+  const currentDate = () => {
+    const date = new Date();
+    const day = date.getDate();
+    const month = String(date.getMonth() + 1).padStart(2, 0);
+    const year = date.getFullYear();
+    const hour = String(date.getHours()).padStart(2, 0);
+    const minute = String(date.getMinutes()).padStart(2, 0);
+    return `${day}.${month}.${year} ${hour}:${minute}`;
   };
 
-  const [newEmail, setNewEmail] = useState(email);
-  const handleNewEmail = event => {
-    setNewEmail(event.target.value);
-  };
+  const handleSubmit = event => {
+    event.preventDefault();
 
-  const [newStatus, setNewStatus] = useState(status);
-  const handleNewStatus = event => {
-    setNewStatus(event.target.value);
-  };
-
-  const [newImage, setNewImage] = useState(null);
-  const handleNewImage = ({ target }) => {
-    setNewImage(target.files[0]);
-  };
-
-  const [newPrice, setNewPrice] = useState(price);
-  const handleNewPrice = event => {
-    setNewPrice(event.target.value);
-  };
-
-  const [newPhone, setNewPhone] = useState(phone);
-  const handleNewPhone = event => {
-    setNewPhone(event.target.value);
-  };
-
-  const [newCity, setNewCity] = useState(city);
-  const handleNewCity = event => {
-    setNewCity(event.target.value);
+    editPost({
+      ...updatedPost,
+      lastUpdate: currentDate(),
+    });
+    alert('Post successfully updated!');
   };
 
   return (
     <div className={clsx(className, styles.root)}>
       <h1>Editing post</h1>
 
-      <form className={styles.form} action='/' method='POST'>
+      <form className={styles.form}>
         <TextField
           id='post-title'
+          name='title'
           className={styles.formInput}
           label='Title'
-          value={newTitle}
-          onChange={handleNewTitle}
           variant='outlined'
+          value={updatedPost.title}
+          onChange={handleUpdatedPost}
           required
           inputProps={{
             minLength: 10,
@@ -73,11 +83,12 @@ const Component = ({ className, title, content, email, status, image, price, pho
 
         <TextField
           id='post-description'
+          name='content'
           className={styles.formInput}
           label='Description'
-          value={newContent}
-          onChange={handleNewContent}
           variant='outlined'
+          value={updatedPost.content}
+          onChange={handleUpdatedPost}
           multiline
           required
           inputProps={{
@@ -91,8 +102,9 @@ const Component = ({ className, title, content, email, status, image, price, pho
           <OutlinedInput
             id='post-price'
             type='number'
-            value={newPrice}
-            onChange={handleNewPrice}
+            name='price'
+            value={updatedPost.price}
+            onChange={handleUpdatedPost}
             startAdornment={<InputAdornment position='start'>Price $</InputAdornment>}
             labelWidth={40}
             inputProps={{
@@ -102,29 +114,30 @@ const Component = ({ className, title, content, email, status, image, price, pho
           />
         </FormControl>
 
-        <TextField
-          id='post-email'
-          className={styles.formInput}
-          label='E-mail'
-          value={newEmail}
-          onChange={handleNewEmail}
-          variant='outlined'
-          type='email'
-          required
-          inputProps={{
-            minLength: 6,
-            maxLength: 100,
-          }}
-        />
+        {/* <TextField
+            id='post-email'
+            className={styles.formInput}
+            label='E-mail'
+            value={newEmail}
+            onChange={handleNewEmail}
+            variant='outlined'
+            type='email'
+            required
+            inputProps={{
+              minLength: 6,
+              maxLength: 100,
+            }}
+          /> */}
 
         <TextField
           id='post-phone'
           type='tel'
+          name='phone'
           className={styles.formInput}
           label='Phone'
-          value={newPhone}
-          onChange={handleNewPhone}
           variant='outlined'
+          value={updatedPost.phone}
+          onChange={handleUpdatedPost}
           inputProps={{
             minLength: 9,
             maxLength: 20,
@@ -133,11 +146,12 @@ const Component = ({ className, title, content, email, status, image, price, pho
 
         <TextField
           id='post-location'
+          name='city'
           className={styles.formInput}
           label='Location'
-          value={newCity}
-          onChange={handleNewCity}
           variant='outlined'
+          value={updatedPost.city}
+          onChange={handleUpdatedPost}
           inputProps={{
             minLength: 3,
             maxLength: 30,
@@ -149,8 +163,9 @@ const Component = ({ className, title, content, email, status, image, price, pho
           <Select
             labelId='post-status-label'
             id='post-status'
-            value={newStatus}
-            onChange={handleNewStatus}
+            name='status'
+            value={updatedPost.status}
+            onChange={handleUpdatedPost}
             label='Status'
           >
             <MenuItem value={'draft'}>Draft</MenuItem>
@@ -165,11 +180,13 @@ const Component = ({ className, title, content, email, status, image, price, pho
             <input
               accept='image/*'
               id='post-image'
+              name='image'
               type='file'
-              onChange={handleNewImage}
+              value={updatedPost.image}
+              onChange={handleUpdatedPost}
               hidden
             />
-            {newImage ? `Uploaded: ${newImage.name}` : 'Upload image'}
+            {updatedPost.image.length > 0 ? `Uploaded: ${updatedPost.imageName}` : 'Upload image'}
           </Button>
         </label>
 
@@ -178,8 +195,9 @@ const Component = ({ className, title, content, email, status, image, price, pho
           type='submit'
           variant='outlined'
           size='large'
+          onClick={handleSubmit}
         >
-          Publish!
+          Update!
         </Button>
       </form>
     </div>
@@ -188,28 +206,30 @@ const Component = ({ className, title, content, email, status, image, price, pho
 
 Component.propTypes = {
   className: PropTypes.string,
+  userEmail: PropTypes.string,
+  editPost: PropTypes.func,
   title: PropTypes.string,
   content: PropTypes.string,
-  email: PropTypes.string,
   status: PropTypes.string,
   image: PropTypes.string,
   price: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   phone: PropTypes.string,
   city: PropTypes.string,
+  imageName: PropTypes.string,
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
+const mapStateToProps = state => ({
+  userEmail: getUserEmail(state),
+});
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapDispatchToProps = dispatch => ({
+  editPost: updatedPost => dispatch(editPost(updatedPost)),
+});
 
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  Component as PostEditing,
-  // Container as PostEditing,
+  // Component as PostEditing,
+  Container as PostEditing,
   Component as PostEditingComponent,
 };

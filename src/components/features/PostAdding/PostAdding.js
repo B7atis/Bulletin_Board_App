@@ -28,9 +28,16 @@ const Component = ({ className, userEmail, addPost }) => {
   const handleNewPost = event => {
     if (event.target.name === 'image') {
       const image = event.target.files[0];
-      setNewPost({ ...newPost, image: event.target.value, imageName: image.name });
+      setNewPost({
+        ...newPost,
+        image: event.target.value,
+        imageName: image.name,
+      });
     } else {
-      setNewPost({ ...newPost, [event.target.name]: event.target.value });
+      setNewPost({
+        ...newPost,
+        [event.target.name]: event.target.value,
+      });
     }
   };
 
@@ -150,9 +157,9 @@ const Component = ({ className, userEmail, addPost }) => {
           name='phone'
           className={styles.formInput}
           label='Phone'
+          variant='outlined'
           value={newPost.phone}
           onChange={handleNewPost}
-          variant='outlined'
           inputProps={{
             minLength: 9,
             maxLength: 20,
@@ -164,9 +171,9 @@ const Component = ({ className, userEmail, addPost }) => {
           name='city'
           className={styles.formInput}
           label='Location'
+          variant='outlined'
           value={newPost.city}
           onChange={handleNewPost}
-          variant='outlined'
           inputProps={{
             minLength: 3,
             maxLength: 30,
