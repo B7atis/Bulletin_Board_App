@@ -9,6 +9,7 @@ import { addPost } from '../../../redux/postsRedux';
 import { getUserEmail } from '../../../redux/userRedux';
 import { TextField, FormControl, InputLabel, Select, MenuItem, Button, OutlinedInput, InputAdornment } from '@material-ui/core';
 import { ImUpload3 } from 'react-icons/im';
+import { useHistory } from 'react-router-dom';
 
 import styles from './PostAdding.module.scss';
 
@@ -51,6 +52,8 @@ const Component = ({ className, userEmail, addPost }) => {
     return `${day}.${month}.${year} ${hour}:${minute}`;
   };
 
+  const history = useHistory();
+
   const handleSubmit = event => {
     event.preventDefault();
     if (newPost.title && newPost.content && newPost.status) {
@@ -74,6 +77,7 @@ const Component = ({ className, userEmail, addPost }) => {
             imageName: '',
           });
           alert('Post added successfully!');
+          history.push('/');
         } else {
           alert('Your description is too short!');
         }
