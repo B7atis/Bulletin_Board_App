@@ -26,10 +26,17 @@
     border: 1px solid $borderAdd;
     border-radius: 5px;
     box-shadow: 0 0 30px $shadow2;
+    text-align: center;
 
     .formInput {
       width: 100%;
       margin: $base-size 0;
+    }
+
+    .imagePreview {
+      max-width: 70%;
+      max-height: 500px;
+      object-fit: cover;
     }
 
     .formButton {

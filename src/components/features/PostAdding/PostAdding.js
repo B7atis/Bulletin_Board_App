@@ -29,6 +29,12 @@ const Component = ({ className, userEmail, addPost }) => {
   const handleNewPost = event => {
     if (event.target.name === 'image') {
       const image = event.target.files[0];
+      const fr = new FileReader();
+      fr.readAsDataURL(image);
+      fr.onload = function () {
+        const imagePreview = document.getElementById('image-preview');
+        imagePreview.src = this.result;
+      };
       setNewPost({
         ...newPost,
         image: event.target.value,
@@ -93,7 +99,7 @@ const Component = ({ className, userEmail, addPost }) => {
     <div className={clsx(className, styles.root)}>
       <h1>Adding new post</h1>
 
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <TextField
           id='post-title'
           name='title'
@@ -214,6 +220,7 @@ const Component = ({ className, userEmail, addPost }) => {
             />
             {newPost.image.length > 0 ? `Uploaded: ${newPost.imageName}` : 'Upload image'}
           </Button>
+          <img id='image-preview' className={styles.imagePreview} src='' alt='' />
         </label>
 
         <Button
@@ -221,7 +228,6 @@ const Component = ({ className, userEmail, addPost }) => {
           type='submit'
           variant='outlined'
           size='large'
-          onClick={handleSubmit}
         >
           Publish!
         </Button>
