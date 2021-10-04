@@ -13,6 +13,7 @@ export const initialState = {
         price: '',
         phone: '123-456-789',
         city: '',
+        imageName: 'test-image-1.jpg',
       },
       {
         id: '2',
@@ -26,6 +27,7 @@ export const initialState = {
         price: 5689,
         phone: '111-222-333',
         city: 'Austria',
+        imageName: 'test-image-2.jpg',
       },
       {
         id: '3',
@@ -39,6 +41,7 @@ export const initialState = {
         price: '',
         phone: '',
         city: '',
+        imageName: '',
       },
     ],
     loading: {
