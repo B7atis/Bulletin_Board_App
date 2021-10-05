@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
 import { connect } from 'react-redux';
-import { getAll } from '../../../redux/postsRedux';
+import { getAll, fetchPosts } from '../../../redux/postsRedux';
 import { PostDetails } from '../../features/PostDetails/PostDetails';
 import { NotFound } from '../NotFound/NotFound';
 
 import styles from './Post.module.scss';
 
-const Component = ({ className, posts, ...props }) => {
+const Component = ({ className, posts, fetchPosts, ...props }) => {
+  fetchPosts();
 
   const properPost = posts.filter(post => post._id === props.match.params.id);
 
@@ -28,6 +29,7 @@ Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   posts: PropTypes.array,
+  fetchPosts: PropTypes.func,
   match: PropTypes.object,
 };
 
@@ -35,11 +37,11 @@ const mapStateToProps = state => ({
   posts: getAll(state),
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapDispatchToProps = dispatch => ({
+  fetchPosts: () => dispatch(fetchPosts()),
+});
 
-const Container = connect(mapStateToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   // Component as Post,
