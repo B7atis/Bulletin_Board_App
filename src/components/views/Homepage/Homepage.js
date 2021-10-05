@@ -11,11 +11,14 @@ import { Button, Link } from '@material-ui/core';
 
 import styles from './Homepage.module.scss';
 
-const Component = ({ className, posts, userStatus }) => (
-  <div className={clsx(className, styles.root)}>
-    <div className={styles.header}>
-      <h1>Announcements</h1>
-      <div>
+const Component = ({ className, posts, userStatus, fetchPosts }) => {
+  fetchPosts();
+
+  return (
+    <div className={clsx(className, styles.root)}>
+      <div className={styles.header}>
+        <h1>Announcements</h1>
+
         {userStatus === 'not-logged-in'
           ? ''
           : <Button
@@ -30,23 +33,25 @@ const Component = ({ className, posts, userStatus }) => (
           </Button>
         }
       </div>
-    </div>
 
-    {posts
-      .sort((a, b) => (
-        new Date(b.lastUpdate) - new Date(a.lastUpdate)
-      ))
-      .map(post => (
-        <PostSummary key={post.id} {...post} />
-      ))
-    }
-  </div>
-);
+      {posts
+        .sort((a, b) => (
+          new Date(b.lastUpdate) - new Date(a.lastUpdate)
+        ))
+        .map(post => (
+          <PostSummary key={post.id} {...post} />
+        ))
+      }
+    </div>
+  );
+};
+
 
 Component.propTypes = {
   posts: PropTypes.array,
   className: PropTypes.string,
   userStatus: PropTypes.string,
+  fetchPosts: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
