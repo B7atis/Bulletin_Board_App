@@ -62,36 +62,33 @@ const Component = ({ className, userEmail, addPost }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    if (newPost.title && newPost.content && newPost.status) {
-      if (newPost.title.length > 10) {
-        if (newPost.content.length > 20) {
-          addPost({
-            ...newPost,
-            id: randomId(10),
-            email: userEmail,
-            date: currentDate(),
-            lastUpdate: currentDate(),
-          });
-          setNewPost({
-            title: '',
-            content: '',
-            status: 'draft',
-            image: '',
-            price: '',
-            phone: '',
-            city: '',
-            imageName: '',
-          });
-          alert('Post added successfully!');
-          history.push('/');
-        } else {
-          alert('Your description is too short!');
-        }
-      } else {
-        alert('Your title is too short!');
-      }
-    } else {
+
+    if (!newPost.title || !newPost.content || !newPost.status) {
       alert('Please fill in all fields.');
+    } else if (newPost.title.length < 10) {
+      alert('Your title is too short!');
+    } else if (newPost.content.length < 20) {
+      alert('Your description is too short!');
+    } else {
+      addPost({
+        ...newPost,
+        id: randomId(10),
+        email: userEmail,
+        date: currentDate(),
+        lastUpdate: currentDate(),
+      });
+      setNewPost({
+        title: '',
+        content: '',
+        status: 'draft',
+        image: '',
+        price: '',
+        phone: '',
+        city: '',
+        imageName: '',
+      });
+      alert('Post successfully added!');
+      history.push('/');
     }
   };
 
