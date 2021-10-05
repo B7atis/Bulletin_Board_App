@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
-import randomId from '@b7atis/id_generator.pack';
+// import randomId from '@b7atis/id_generator.pack';
 
 import { connect } from 'react-redux';
 import { addPost } from '../../../redux/postsRedux';
@@ -72,7 +72,7 @@ const Component = ({ className, userEmail, addPost }) => {
     } else {
       addPost({
         ...newPost,
-        id: randomId(10),
+        // id: randomId(10),
         email: userEmail,
         date: currentDate(),
         lastUpdate: currentDate(),

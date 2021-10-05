@@ -12,10 +12,10 @@ import { useHistory } from 'react-router-dom';
 
 import styles from './PostEditing.module.scss';
 
-const Component = ({ className, editPost, id, title, content, date, lastUpdate, email, status, image, price, phone, city, imageName }) => {
+const Component = ({ className, editPost, _id, title, content, date, lastUpdate, email, status, image, price, phone, city, imageName }) => {
 
   const [updatedPost, setUpdatedPost] = useState({
-    id: id,
+    id: _id,
     title: title,
     content: content,
     date: date,
@@ -228,7 +228,7 @@ const Component = ({ className, editPost, id, title, content, date, lastUpdate, 
 Component.propTypes = {
   className: PropTypes.string,
   editPost: PropTypes.func,
-  id: PropTypes.string,
+  _id: PropTypes.string,
   title: PropTypes.string,
   content: PropTypes.string,
   date: PropTypes.string,
