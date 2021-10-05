@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
@@ -12,7 +12,9 @@ import { Button, Link } from '@material-ui/core';
 import styles from './Homepage.module.scss';
 
 const Component = ({ className, posts, userStatus, fetchPosts }) => {
-  fetchPosts();
+  useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts]);
 
   return (
     <div className={clsx(className, styles.root)}>
