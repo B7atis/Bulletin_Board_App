@@ -61,12 +61,13 @@ const Component = ({ className, userEmail, addPost }) => {
     } else if (newPost.content.length < 20) {
       alert('Your description is too short!');
     } else {
+      const date = new Date(Date.now());
       addPost({
         ...newPost,
         // id: randomId(10),
         email: userEmail,
-        date: currentDate(),
-        lastUpdate: currentDate(),
+        date: currentDate(date),
+        lastUpdate: currentDate(date),
       });
       setNewPost({
         title: '',
