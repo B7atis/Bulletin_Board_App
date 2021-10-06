@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 import { connect } from 'react-redux';
 import { editPost } from '../../../redux/postsRedux';
 import { TextField, FormControl, InputLabel, Select, MenuItem, Button, OutlinedInput, InputAdornment } from '@material-ui/core';
@@ -16,7 +15,7 @@ import styles from './PostEditing.module.scss';
 const Component = ({ className, editPost, _id, title, content, date, lastUpdate, email, status, image, price, phone, city, imageName }) => {
 
   const [updatedPost, setUpdatedPost] = useState({
-    id: _id,
+    _id: _id,
     title: title,
     content: content,
     date: date,
@@ -41,7 +40,7 @@ const Component = ({ className, editPost, _id, title, content, date, lastUpdate,
       };
       setUpdatedPost({
         ...updatedPost,
-        image: event.target.value,
+        image: image,
         imageName: image.name,
       });
     } else {
@@ -58,7 +57,7 @@ const Component = ({ className, editPost, _id, title, content, date, lastUpdate,
     event.preventDefault();
 
     if (!updatedPost.title || !updatedPost.content || !updatedPost.status) {
-      alert('Please fill in all fields.');
+      alert('Please fill all of the necessary fields!');
     } else if (updatedPost.title.length < 10) {
       alert('Your title is too short!');
     } else if (updatedPost.content.length < 20) {
@@ -103,6 +102,7 @@ const Component = ({ className, editPost, _id, title, content, date, lastUpdate,
           value={updatedPost.content}
           onChange={handleUpdatedPost}
           multiline
+          rows='10'
           required
           inputProps={{
             minLength: 20,
@@ -116,31 +116,16 @@ const Component = ({ className, editPost, _id, title, content, date, lastUpdate,
             id='post-price'
             type='number'
             name='price'
+            startAdornment={<InputAdornment position='start'>$</InputAdornment>}
+            labelWidth={40}
             value={updatedPost.price}
             onChange={handleUpdatedPost}
-            startAdornment={<InputAdornment position='start'>Price $</InputAdornment>}
-            labelWidth={40}
             inputProps={{
               min: 1,
               max: 999999,
             }}
           />
         </FormControl>
-
-        {/* <TextField
-            id='post-email'
-            className={styles.formInput}
-            label='E-mail'
-            value={newEmail}
-            onChange={handleNewEmail}
-            variant='outlined'
-            type='email'
-            required
-            inputProps={{
-              minLength: 6,
-              maxLength: 100,
-            }}
-          /> */}
 
         <TextField
           id='post-phone'
@@ -195,11 +180,10 @@ const Component = ({ className, editPost, _id, title, content, date, lastUpdate,
               id='post-image'
               name='image'
               type='file'
-              value={updatedPost.image}
               onChange={handleUpdatedPost}
               hidden
             />
-            {updatedPost.image.length > 0 ? `Uploaded: ${updatedPost.imageName}` : 'Upload image'}
+            {updatedPost.image ? `Uploaded: ${updatedPost.imageName}` : 'Upload image'}
           </Button>
           <img id='image-preview' className={styles.imagePreview} src='' alt='' />
         </label>
@@ -241,7 +225,6 @@ const mapDispatchToProps = dispatch => ({
 const Container = connect(null, mapDispatchToProps)(Component);
 
 export {
-  // Component as PostEditing,
   Container as PostEditing,
   Component as PostEditingComponent,
 };

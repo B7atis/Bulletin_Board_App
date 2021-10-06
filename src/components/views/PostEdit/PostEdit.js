@@ -41,14 +41,9 @@ const mapStateToProps = state => ({
   userEmail: getUserEmail(state),
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
-
 const Container = connect(mapStateToProps)(Component);
 
 export {
-  // Component as PostEdit,
   Container as PostEdit,
   Component as PostEditComponent,
 };

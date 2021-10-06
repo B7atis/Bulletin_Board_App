@@ -1,14 +1,14 @@
 import Axios from 'axios';
 
-/* selectors */
+// selectors
 export const getAll = ({ posts }) => posts.data;
 export const getSingle = ({ posts }) => posts.singlePost;
 
-/* action name creator */
+// action name creator
 const reducerName = 'posts';
 const createActionName = name => `app/${reducerName}/${name}`;
 
-/* action types */
+// action types
 const FETCH_START = createActionName('FETCH_START');
 const FETCH_SUCCESS = createActionName('FETCH_SUCCESS');
 const FETCH_POST_SUCCESS = createActionName('FETCH_POST_SUCCESS');
@@ -16,7 +16,7 @@ const FETCH_ERROR = createActionName('FETCH_ERROR');
 const ADD_POST = createActionName('ADD_POST');
 const EDIT_POST = createActionName('EDIT_POST');
 
-/* action creators */
+// action creators
 export const fetchStarted = payload => ({ payload, type: FETCH_START });
 export const fetchSuccess = payload => ({ payload, type: FETCH_SUCCESS });
 export const fetchPostSuccess = payload => ({ payload, type: FETCH_POST_SUCCESS });
@@ -24,11 +24,11 @@ export const fetchError = payload => ({ payload, type: FETCH_ERROR });
 export const addPost = payload => ({ payload, type: ADD_POST });
 export const editPost = payload => ({ payload, type: EDIT_POST });
 
-/* thunk creators */
+// thunk creators
 export const fetchPosts = () => {
   return (dispatch, getState) => {
-
     if (getState().posts.data.length === 0 && getState().posts.loading.active === false) {
+
       dispatch(fetchStarted());
 
       Axios
@@ -58,7 +58,22 @@ export const fetchSinglePost = id => {
   };
 };
 
-/* reducer */
+export const addNewPost = newPost => {
+  return (dispatch, getState) => {
+
+    Axios
+      .post('http://localhost:8000/api/posts', newPost)
+      .then(res => {
+        dispatch(addPost(res.data));
+      })
+      .catch(err => {
+        dispatch(fetchError(err.message || true));
+      });
+  };
+};
+
+
+// reducer
 export const reducer = (statePart = [], action = {}) => {
   switch (action.type) {
     case FETCH_START: {
@@ -73,11 +88,11 @@ export const reducer = (statePart = [], action = {}) => {
     case FETCH_SUCCESS: {
       return {
         ...statePart,
+        data: action.payload,
         loading: {
           active: false,
           error: false,
         },
-        data: action.payload,
       };
     }
     case FETCH_POST_SUCCESS: {

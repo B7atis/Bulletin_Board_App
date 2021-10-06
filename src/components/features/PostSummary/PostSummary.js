@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux';
 import { Link } from '@material-ui/core';
 
 import styles from './PostSummary.module.scss';
@@ -19,6 +17,7 @@ const Component = ({ className, _id, title, image, price, lastUpdate }) => {
       imagePreview.src = this.result;
     };
   }
+
   return (
     <div className={clsx(className, styles.root)}>
       <Link className={styles.postLink} href={`/post/${_id}`} >
@@ -49,18 +48,7 @@ Component.propTypes = {
   lastUpdate: PropTypes.string,
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
-
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
-
 export {
   Component as PostSummary,
-  // Container as PostSummary,
   Component as PostSummaryComponent,
 };

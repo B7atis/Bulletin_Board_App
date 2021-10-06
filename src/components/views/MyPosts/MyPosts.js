@@ -42,7 +42,7 @@ const Component = ({ className, posts, userStatus, userEmail }) => (
         }
       </>
     }
-  </div >
+  </div>
 );
 
 Component.propTypes = {
@@ -58,14 +58,9 @@ const mapStateToProps = state => ({
   userEmail: getUserEmail(state),
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
-
 const Container = connect(mapStateToProps)(Component);
 
 export {
-  // Component as MyPosts,
   Container as MyPosts,
   Component as MyPostsComponent,
 };

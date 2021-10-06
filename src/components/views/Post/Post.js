@@ -26,7 +26,6 @@ const Component = ({ className, post, fetchSinglePost, ...props }) => {
 };
 
 Component.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
   post: PropTypes.object,
   fetchSinglePost: PropTypes.func,
@@ -44,7 +43,6 @@ const mapDispatchToProps = dispatch => ({
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  // Component as Post,
   Container as Post,
   Component as PostComponent,
 };

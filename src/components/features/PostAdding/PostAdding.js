@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
-// import randomId from '@b7atis/id_generator.pack';
 
 import { connect } from 'react-redux';
-import { addPost } from '../../../redux/postsRedux';
+import { addNewPost } from '../../../redux/postsRedux';
 import { getUserEmail } from '../../../redux/userRedux';
 import { TextField, FormControl, InputLabel, Select, MenuItem, Button, OutlinedInput, InputAdornment } from '@material-ui/core';
 import { ImUpload3 } from 'react-icons/im';
@@ -38,7 +37,7 @@ const Component = ({ className, userEmail, addPost }) => {
       };
       setNewPost({
         ...newPost,
-        image: event.target.value,
+        image: image,
         imageName: image.name,
       });
     } else {
@@ -55,7 +54,7 @@ const Component = ({ className, userEmail, addPost }) => {
     event.preventDefault();
 
     if (!newPost.title || !newPost.content || !newPost.status) {
-      alert('Please fill in all fields.');
+      alert('Please fill all of the necessary fields!');
     } else if (newPost.title.length < 10) {
       alert('Your title is too short!');
     } else if (newPost.content.length < 20) {
@@ -64,7 +63,6 @@ const Component = ({ className, userEmail, addPost }) => {
       const date = new Date(Date.now());
       addPost({
         ...newPost,
-        // id: randomId(10),
         email: userEmail,
         date: currentDate(date),
         lastUpdate: currentDate(date),
@@ -126,7 +124,7 @@ const Component = ({ className, userEmail, addPost }) => {
             id='post-price'
             type='number'
             name='price'
-            startAdornment={<InputAdornment position='start'>Price $</InputAdornment>}
+            startAdornment={<InputAdornment position='start'>$</InputAdornment>}
             labelWidth={40}
             value={newPost.price}
             onChange={handleNewPost}
@@ -136,19 +134,6 @@ const Component = ({ className, userEmail, addPost }) => {
             }}
           />
         </FormControl>
-
-        {/* <TextField
-          id='post-email'
-          className={styles.formInput}
-          label='E-mail'
-          variant='outlined'
-          type='email'
-          required
-          inputProps={{
-            minLength: 6,
-            maxLength: 100,
-          }}
-        /> */}
 
         <TextField
           id='post-phone'
@@ -203,11 +188,10 @@ const Component = ({ className, userEmail, addPost }) => {
               id='post-image'
               name='image'
               type='file'
-              value={newPost.image}
               onChange={handleNewPost}
               hidden
             />
-            {newPost.image.length > 0 ? `Uploaded: ${newPost.imageName}` : 'Upload image'}
+            {newPost.image ? `Uploaded: ${newPost.imageName}` : 'Upload image'}
           </Button>
           <img id='image-preview' className={styles.imagePreview} src='' alt='' />
         </label>
@@ -231,18 +215,17 @@ Component.propTypes = {
   addPost: PropTypes.func,
 };
 
-const mapDispatchToProps = dispatch => ({
-  addPost: newPost => dispatch(addPost(newPost)),
-});
-
 const mapStateToProps = state => ({
   userEmail: getUserEmail(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+  addPost: newPost => dispatch(addNewPost(newPost)),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  // Component as PostAdding,
   Container as PostAdding,
   Component as PostAddingComponent,
 };

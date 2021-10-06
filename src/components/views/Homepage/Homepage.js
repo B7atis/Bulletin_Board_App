@@ -50,8 +50,8 @@ const Component = ({ className, posts, userStatus, fetchPosts }) => {
 
 
 Component.propTypes = {
-  posts: PropTypes.array,
   className: PropTypes.string,
+  posts: PropTypes.array,
   userStatus: PropTypes.string,
   fetchPosts: PropTypes.func,
 };
@@ -68,7 +68,6 @@ const mapDispatchToProps = dispatch => ({
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  // Component as Homepage,
   Container as Homepage,
   Component as HomepageComponent,
 };
